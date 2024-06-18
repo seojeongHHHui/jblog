@@ -24,4 +24,8 @@ private SqlSession sqlSession;
 									Map.of("id", id, "password", password));
 	}
 
+	public UserVo findById(String id) {
+		return sqlSession.selectOne("user.findById", id);
+	}
+
 }

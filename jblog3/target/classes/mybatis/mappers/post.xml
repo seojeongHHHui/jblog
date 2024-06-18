@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="post">
+	<select id="findAll" parameterType="long" resultType="postvo">
+		<![CDATA[
+		select no, title, contents, reg_date as regDate, category_no as categoryNo
+		from post
+		where category_no=#{categoryNo }
+		order by no asc
+		]]>
+	</select>
+	
+	<select id="getDefault" parameterType="long" resultType="long">
+		<![CDATA[
+		select min(no)
+		from post
+		where category_no=#{categoryNo }
+		]]>
+	</select>
+	
+	<select id="getCount" parameterType="long" resultType="int">
+		<![CDATA[
+		select count(*)
+		from post
+		where category_no=#{categoryNo }
+		]]>
+	</select>
+	
+	<select id="getPost" parameterType="long" resultType="postvo">
+		<![CDATA[
+		select no, title, contents, reg_date as regDate, category_no as categoryNo
+		from post
+		where no=#{no }
+		]]>
+	</select>
+	
+	<insert id="addPost" parameterType="postvo">
+		<![CDATA[
+		insert
+		into post
+		values(null, #{title }, #{contents }, now(), #{categoryNo })
+		]]>
+		<selectKey keyProperty="no" resultType="long" order="AFTER">
+			<![CDATA[
+			select last_insert_id() from dual
+			]]>
+		</selectKey>
+	</insert>
+	
+	<update id="updateCategoryToDefault" parameterType="map">
+		<![CDATA[
+		update post
+		set category_no=#{defaultCategoryNo }
+		where category_no=#{no }
+		]]>
+	</update>
+	
+	
+	
+	
+</mapper>
