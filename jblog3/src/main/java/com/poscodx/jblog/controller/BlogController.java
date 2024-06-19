@@ -129,8 +129,12 @@ public class BlogController {
 		}
 		
 		List<CategoryVo> list = categoryService.getList(id);
+		
+		BlogVo vo = blogService.getBlog(id);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("id", id);
+		model.addAttribute("vo", vo);
 		return "blog/admin-category";
 	}
 	
@@ -167,8 +171,12 @@ public class BlogController {
 		}
 		
 		List<CategoryVo> categoryList = categoryService.getList(id);
+		
+		BlogVo vo = blogService.getBlog(id);
+		
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("id", id);
+		model.addAttribute("vo", vo);
 		return "blog/admin-write";
 	}
 	

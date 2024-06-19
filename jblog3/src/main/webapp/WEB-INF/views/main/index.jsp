@@ -7,12 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
-<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css" />
 </head>
 <body>
-<c:import url="/WEB-INF/views/includes/header.jsp" />
 	<div class="center-content">
-	
+		<c:import url="/WEB-INF/views/includes/header_main.jsp" />
+		
 		<form class="search-form">
 			<fieldset>
 				<input type="text" name="keyword" />

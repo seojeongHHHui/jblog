@@ -46,7 +46,7 @@ $(function() {
 </head>
 <body>
 	<div class="center-content">
-		<c:import url="/WEB-INF/views/includes/header.jsp" />
+		<c:import url="/WEB-INF/views/includes/header_main.jsp" />
 		
 		<form:form
 					modelAttribute="userVo"
