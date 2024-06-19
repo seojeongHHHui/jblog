@@ -1,6 +1,7 @@
 package com.poscodx.jblog.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -24,7 +25,7 @@ import com.poscodx.jblog.vo.PostVo;
 import com.poscodx.jblog.vo.UserVo;
 
 @Controller
-@RequestMapping("/{id:(?!assets).*}")
+@RequestMapping("/{id:(?!assets|images).*}")
 public class BlogController {
 
 	@Autowired
@@ -37,12 +38,12 @@ public class BlogController {
 	private ServletContext servletContext;
 	@Autowired
 	private FileUploadService fileUploadService;
-
-	// @RequestMapping({"", "/{categoryNo}", "/{categoryNo}/{postNo}"})
-	@RequestMapping(value = { "", "/{categoryNo:^(?!admin$).*$}", "/{categoryNo:^(?!admin$).*$}/{postNo}" })
+	
+	//@RequestMapping(value = { "", "/{categoryNo:^(?!admin$).*$}", "/{categoryNo:^(?!admin$).*$}/{postNo}" })
+	@RequestMapping({"", "/{pathNo1}", "/{pathNo1}/{pathNo2}"})
 	public String index(@PathVariable("id") String id,
-			@PathVariable(name = "categoryNo", required = false) Long categoryNo,
-			@PathVariable(name = "postNo", required = false) Long postNo,
+			@PathVariable("pathNo1") Optional<Long> pathNo1,
+			@PathVariable("pathNo2") Optional<Long> pathNo2,
 			Model model) {
 		
 		// 카테고리 리스트
@@ -52,10 +53,19 @@ public class BlogController {
 		PostVo postVo = null;
 		List<PostVo> postList = null;
 		
-		if(categoryNo == null) {
+		// categoryNo, postNo 세팅
+		Long categoryNo = 0L;
+		Long postNo = 0L;
+		
+		if(pathNo1.isPresent()) {
+			categoryNo = pathNo1.get();
+		} else {
 			categoryNo = categoryService.getDefault(id);
 		}
-		if(postNo == null) {
+		
+		if(pathNo2.isPresent()) {
+			postNo = pathNo2.get();
+		} else {
 			postNo = postService.getDefault(categoryNo);
 		}
 		
@@ -74,7 +84,6 @@ public class BlogController {
 		model.addAttribute("postList", postList);
 		model.addAttribute("postVo", postVo);
 		model.addAttribute("blogVo", blogVo);
-		//model.addAttribute("blogLogo", blogVo.getLogo());
 		return "blog/main";
 	}
 

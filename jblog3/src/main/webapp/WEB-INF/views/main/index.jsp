@@ -12,17 +12,7 @@
 <body>
 <c:import url="/WEB-INF/views/includes/header.jsp" />
 	<div class="center-content">
-		
-		
-		<ul>
-			<c:forEach items='${list }' var='vo'>
-				<li>
-					<td><a href="${pageContext.request.contextPath }/${vo.id }">${vo.title }</a></td>
-				</li>
-			</c:forEach>
-		</ul>
-		
-		<!--
+	
 		<form class="search-form">
 			<fieldset>
 				<input type="text" name="keyword" />
@@ -34,7 +24,15 @@
 				<input type="radio" name="which" value="blog-user"> <label>블로거</label>
 			</fieldset>
 		</form>
-		-->
+		
+		<ul>
+			<c:forEach items='${list }' var='vo'>
+				<li>
+					<td><a href="${pageContext.request.contextPath }/${vo.id }">${vo.title }</a></td>
+				</li>
+			</c:forEach>
+		</ul>
+		
 	</div>
 </body>
 </html>

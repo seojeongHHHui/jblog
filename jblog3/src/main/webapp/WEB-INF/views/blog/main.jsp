@@ -49,7 +49,7 @@
 
 		<div id="extra">
 			<div class="blog-logo">
-				<!-- <img src="${pageContext.request.contextPath}/${blogLogo }"> -->
+				<img src="${pageContext.request.contextPath}/${blogVo.logo }">
 			</div>
 		</div>
 
