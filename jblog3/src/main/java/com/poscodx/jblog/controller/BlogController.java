@@ -181,7 +181,7 @@ public class BlogController {
 		}
 		
 		postService.addPost(vo);
-		return "redirect:/" + id + "/" + vo.getCategoryNo();
+		return "redirect:/" + id + "/" + vo.getCategoryNo() + "/" + vo.getNo();
 	}
 
 }
